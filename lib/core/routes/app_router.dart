@@ -4,7 +4,7 @@ import 'package:qrty/feature/splash/splash_screen.dart';
 
 class AppRouter {
   static Route generateRoute(RouteSettings settings) {
-    final arg = settings.arguments;
+    //final arg = settings.arguments;
     switch (settings.name) {
       case Routes.splash:
         return MaterialPageRoute(builder: (_) => SplashScreen());
