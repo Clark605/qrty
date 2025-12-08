@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:qrty/core/common/widgets/fab.dart';
 import 'package:qrty/core/constants/app_assets.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
+import 'package:qrty/core/extensions/navigator_extensions.dart';
+import 'package:qrty/core/routes/routes.dart';
 import 'package:qrty/core/theme/app_colors.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
@@ -61,21 +64,10 @@ class SplashScreen extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.primary,
-                              blurRadius: 30,
-                              spreadRadius: -5,
-                            ),
-                          ],
-                        ),
-                        child: FloatingActionButton(
-                          onPressed: () {},
-                          child: Icon(Icons.arrow_forward),
-                        ),
+                      Fab(
+                        onPressed: () {
+                          context.pushReplacementNamed(Routes.appSection);
+                        },
                       ),
                     ],
                   ),

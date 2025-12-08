@@ -24,6 +24,8 @@ dependencies:
   objectbox: ^5.0.3
   easy_localization: ^3.0.8
   device_preview: ^1.3.1
+  animated_bottom_navigation_bar: ^1.4.0
+  flutter_svg: ^2.2.3
 
 dev_dependencies:
   flutter_test:
