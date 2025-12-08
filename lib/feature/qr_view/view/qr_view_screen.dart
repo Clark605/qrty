@@ -1,14 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:qrty/core/common/widgets/app_background.dart';
 import 'package:qrty/core/constants/app_assets.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/theme/app_colors.dart';
 import 'package:qrty/feature/qr_view/cubit/qr_view_cubit.dart';
 import 'package:qrty/feature/qr_view/widgets/action_button.dart';
-import 'package:qrty/feature/qr_view/widgets/qr_code_view.dart';
 import 'package:qrty/feature/qr_view/widgets/text_data_view.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
@@ -102,14 +100,14 @@ class QrViewView extends StatelessWidget {
                       SizedBox(width: context.wp(4)),
                       ActionButton(
                         icon: state.showQrCode
-                            ? AppAssets.save
-                            : AppAssets.copy,
+                            ? AppAssets.copy
+                            : AppAssets.save,
                         label: state.showQrCode
-                            ? LocaleKeys.save.tr()
-                            : LocaleKeys.copy.tr(),
+                            ? LocaleKeys.copy.tr()
+                            : LocaleKeys.save.tr(),
                         onTap: () => state.showQrCode
-                            ? cubit.saveQrCode()
-                            : cubit.copyToClipboard(data, context),
+                            ? cubit.copyToClipboard(data, context)
+                            : cubit.saveQrCode(),
                       ),
                     ],
                   ),
