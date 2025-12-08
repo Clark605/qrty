@@ -36,5 +36,8 @@ abstract class  LocaleKeys {
   static const copy_to_clipboard = 'copy_to_clipboard';
   static const save = 'save';
   static const result = 'result';
+  static const data = 'data';
+  static const show_qr_code = 'show_qr_code';
+  static const qr_code = 'qr_code';
 
 }
