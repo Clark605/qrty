@@ -2,28 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:qrty/core/theme/app_colors.dart';
 
 class AppTheme {
-  static ThemeData appTheme = ThemeData(
+  final BuildContext context;
+  AppTheme(this.context);
+
+  ThemeData get appTheme => ThemeData(
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.background,
 
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
       headlineMedium: TextStyle(
         color: AppColors.titleGrey,
         fontSize: 27,
         fontWeight: FontWeight.normal,
-        fontFamily: 'Itim',
+        fontFamily: Localizations.localeOf(context).languageCode == 'en'
+            ? 'Itim'
+            : null,
       ),
       titleMedium: TextStyle(
         color: AppColors.titleGrey,
         fontSize: 16,
         fontWeight: FontWeight.normal,
-        fontFamily: 'Itim',
+        fontFamily: Localizations.localeOf(context).languageCode == 'en'
+            ? 'Itim'
+            : null,
       ),
       bodyMedium: TextStyle(
         color: AppColors.bodyGrey,
         fontSize: 14,
         fontWeight: FontWeight.normal,
-        fontFamily: 'Itim',
+        fontFamily: Localizations.localeOf(context).languageCode == 'en'
+            ? 'Itim'
+            : null,
       ),
     ),
   );
