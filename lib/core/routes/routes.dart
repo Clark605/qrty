@@ -2,6 +2,7 @@ class Routes {
   static const String splash = '/splash';
   static const String appSection = '/app_section';
   static const String settings = '/settings';
+  static const String scanQr = '/scanQr';
   static const String qrView = '/qrView';
   static const String createQr = '/createQr';
   static const String scanHistory = '/scanHistory';
