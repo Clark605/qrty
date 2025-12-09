@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qrty/core/extensions/navigator_extensions.dart';
 import 'package:qrty/core/routes/routes.dart';
+import 'package:qrty/core/utils/qr_code_type_detector.dart';
+import 'package:qrty/core/utils/qr_text_formatter.dart';
 
 part 'scan_qr_state.dart';
 
@@ -37,13 +39,17 @@ class ScanQrCubit extends Cubit<ScanQrState> {
 
     emit(state.copyWith(isScanning: false));
 
+    final qrType = QRCodeTypeDetector.detectType(barcode!.rawValue!);
+    final formattedText = QrTextFormatter.formatText(barcode.rawValue!, qrType);
+
     context
         .pushNamed(
           Routes.qrView,
           arguments: {
-            'data': barcode!.rawValue!,
+            'data': formattedText,
             'timestamp': DateTime.now(),
             'source': 'scan',
+            'type': qrType,
           },
         )
         .then((_) {

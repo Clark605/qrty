@@ -14,22 +14,8 @@ class ScanQrScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scannerController = MobileScannerController();
 
-    return BlocProvider(
-      create: (context) =>
-          ScanQrCubit(scannerController: scannerController, context: context),
-      child: const ScanQrView(),
-    );
-  }
-}
-
-class ScanQrView extends StatelessWidget {
-  const ScanQrView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: AppColors.secondary,
       body: BlocBuilder<ScanQrCubit, ScanQrState>(
         builder: (context, state) {
@@ -91,6 +77,7 @@ class ScanQrView extends StatelessWidget {
           );
         },
       ),
+    
     );
   }
 }
