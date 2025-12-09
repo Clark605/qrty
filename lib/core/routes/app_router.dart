@@ -21,14 +21,6 @@ class AppRouter {
         return AnimationRoute(page: SplashScreen());
       case Routes.appSection:
         return AnimationRoute(page: AppSection());
-      case Routes.scanQr:
-        return AnimationRoute(
-          page: BlocProvider(
-            create: (context) =>
-                ScanQrCubit(scannerController: MobileScannerController()),
-            child: ScanQrScreen(),
-          ),
-        );
       case Routes.qrView:
         return AnimationRoute(
           page: BlocProvider(
