@@ -31,5 +31,8 @@
     "copy" : "نسخ",
     "copy_to_clipboard" : "نسخ إلى الحافظة",
     "save" : "حفظ",
-    "result" : "النتيجة"
+    "result" : "النتيجة",
+    "data" : "البيانات",
+    "show_qr_code" : "عرض رمز QR",
+    "qr_code" : "رمز QR"
 }

@@ -31,5 +31,8 @@
     "copy" : "Copy",
     "copy_to_clipboard" : "Copy to clipboard",
     "save" : "Save",
-    "result" : "Result"
+    "result" : "Result",
+    "data" : "Data",
+    "show_qr_code" : "Show QR Code",
+    "qr_code" : "QR Code"
 }

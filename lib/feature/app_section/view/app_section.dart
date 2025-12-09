@@ -7,6 +7,7 @@ import 'package:qrty/core/common/widgets/fab.dart';
 import 'package:qrty/core/constants/app_assets.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/theme/app_colors.dart';
+import 'package:qrty/feature/scan_qr/view/scan_qr_screen.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
 class AppSection extends StatefulWidget {
@@ -17,13 +18,13 @@ class AppSection extends StatefulWidget {
 }
 
 class AppSectionState extends State<AppSection> {
-  int _currentIndex = 0;
+  int _currentIndex = 2;
   final PageController pageController = PageController();
 
   final List<Widget> screens = [
-    Container(color: Colors.white),
     Container(color: Colors.blue),
     Container(color: Colors.yellow),
+    const ScanQrScreen(),
   ];
 
   final List<String> icons = [AppAssets.qr, AppAssets.history];
@@ -70,6 +71,7 @@ class AppSectionState extends State<AppSection> {
                   SvgPicture.asset(
                     icons[index],
                     colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+                    height: context.hp(3.3),
                   ),
                   Text(
                     index == 0
