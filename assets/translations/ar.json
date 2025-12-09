@@ -34,5 +34,7 @@
     "result" : "النتيجة",
     "data" : "البيانات",
     "show_qr_code" : "عرض رمز QR",
-    "qr_code" : "رمز QR"
+    "qr_code" : "رمز QR",
+    "language" : "اللغة",
+    "choose_your_preferred_language" : "اختر لغتك المفضلة."
 }

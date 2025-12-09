@@ -34,5 +34,7 @@
     "result" : "Result",
     "data" : "Data",
     "show_qr_code" : "Show QR Code",
-    "qr_code" : "QR Code"
+    "qr_code" : "QR Code",
+    "language" : "Language",
+    "choose_your_preferred_language" : "Choose your preferred language."
 }
