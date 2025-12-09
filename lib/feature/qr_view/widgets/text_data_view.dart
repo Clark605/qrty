@@ -2,30 +2,33 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:qrty/core/constants/app_assets.dart';
+import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/theme/app_colors.dart';
+import 'package:qrty/core/utils/type_icon.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
-class TextDataView extends StatefulWidget {
+class QrResultView extends StatefulWidget {
   final String data;
   final DateTime timestamp;
   final bool showQrCode;
   final VoidCallback onToggleView;
+  final QRCodeType type;
 
-  const TextDataView({
+  const QrResultView({
     super.key,
     required this.data,
     required this.timestamp,
     required this.showQrCode,
     required this.onToggleView,
+    required this.type,
   });
 
   @override
-  State<TextDataView> createState() => _TextDataViewState();
+  State<QrResultView> createState() => _QrResultViewState();
 }
 
-class _TextDataViewState extends State<TextDataView> {
+class _QrResultViewState extends State<QrResultView> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +36,10 @@ class _TextDataViewState extends State<TextDataView> {
         horizontal: context.wp(4.4),
         vertical: context.hp(1.9),
       ),
-
+      margin: EdgeInsets.symmetric(
+        horizontal: context.wp(5),
+        vertical: context.hp(2),
+      ),
       decoration: BoxDecoration(
         color: Color(0xff3C3C3C),
         borderRadius: BorderRadius.circular(context.wp(0.6)),
@@ -47,7 +53,7 @@ class _TextDataViewState extends State<TextDataView> {
             spacing: context.wp(3),
             children: [
               SvgPicture.asset(
-                AppAssets.qrAppBar,
+                TypeIcon.typeIcon(widget.type),
                 colorFilter: const ColorFilter.mode(
                   AppColors.primary,
                   BlendMode.srcIn,
@@ -57,7 +63,7 @@ class _TextDataViewState extends State<TextDataView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    LocaleKeys.data.tr(),
+                    widget.type.name,
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   Text(

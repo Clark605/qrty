@@ -1,9 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:qrty/core/extensions/navigator_extensions.dart';
-import 'package:qrty/core/routes/routes.dart';
+import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/utils/qr_code_type_detector.dart';
 import 'package:qrty/core/utils/qr_text_formatter.dart';
 
@@ -11,10 +10,8 @@ part 'scan_qr_state.dart';
 
 class ScanQrCubit extends Cubit<ScanQrState> {
   final MobileScannerController scannerController;
-  final BuildContext context;
 
-  ScanQrCubit({required this.scannerController, required this.context})
-    : super(const ScanQrState());
+  ScanQrCubit({required this.scannerController}) : super(const ScanQrState());
 
   void toggleFlash() {
     scannerController.toggleTorch();
@@ -42,24 +39,28 @@ class ScanQrCubit extends Cubit<ScanQrState> {
     final qrType = QRCodeTypeDetector.detectType(barcode!.rawValue!);
     final formattedText = QrTextFormatter.formatText(barcode.rawValue!, qrType);
 
-    context
-        .pushNamed(
-          Routes.qrView,
-          arguments: {
-            'data': formattedText,
-            'timestamp': DateTime.now(),
-            'source': 'scan',
-            'type': qrType,
-          },
-        )
-        .then((_) {
-          // Re-enable scanning when returning
-          emit(state.copyWith(isScanning: true));
-        });
+    emit(
+      state.copyWith(
+        isScanning: false,
+        scannedData: formattedText,
+        scannedType: qrType,
+      ),
+    );
+  }
+
+  void resumeScanning() {
+    emit(
+      state.copyWith(isScanning: true, scannedData: null, scannedType: null),
+    );
   }
 
   void pickImageFromGallery() async {
-    // TODO: Implement image picker and QR code detection from image
+    final pickedImage = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedImage == null) return;
+    final barcodes = await scannerController.analyzeImage(pickedImage.path);
+    onBarcodeDetected(barcodes!);
   }
 
   @override
