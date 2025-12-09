@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
+import 'package:qrty/core/services/feedback_service.dart';
 import 'package:qrty/core/utils/qr_code_type_detector.dart';
 import 'package:qrty/core/utils/qr_text_formatter.dart';
 
@@ -28,13 +29,16 @@ class ScanQrCubit extends Cubit<ScanQrState> {
     emit(state.copyWith(zoomLevel: value));
   }
 
-  void onBarcodeDetected(BarcodeCapture barcodeCapture) {
+  void onBarcodeDetected(BarcodeCapture barcodeCapture) async {
     if (!state.isScanning) return;
 
     final barcode = barcodeCapture.barcodes.firstOrNull;
     if (barcode?.rawValue == null) return;
 
     emit(state.copyWith(isScanning: false));
+
+    // Play feedback based on user settings
+    await FeedbackService.instance.playFeedback();
 
     final qrType = QRCodeTypeDetector.detectType(barcode!.rawValue!);
     final formattedText = QrTextFormatter.formatText(barcode.rawValue!, qrType);
