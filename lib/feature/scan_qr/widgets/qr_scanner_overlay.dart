@@ -1,9 +1,22 @@
+// qr_scanner_overlay.dart
 import 'package:flutter/material.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/theme/app_colors.dart';
 
 class QRScannerOverlay extends StatelessWidget {
   const QRScannerOverlay({super.key});
+
+  // Static method to calculate scan area rect
+  static Rect getScanArea(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final scanAreaSize = context.wp(75);
+
+    return Rect.fromCenter(
+      center: Offset(size.width / 2, size.height / 2),
+      width: scanAreaSize,
+      height: scanAreaSize,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -2,11 +2,14 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qrty/core/common/widgets/fab.dart';
 import 'package:qrty/core/constants/app_assets.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/theme/app_colors.dart';
+import 'package:qrty/feature/scan_qr/cubit/scan_qr_cubit.dart';
 import 'package:qrty/feature/scan_qr/view/scan_qr_screen.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
@@ -24,7 +27,17 @@ class AppSectionState extends State<AppSection> {
   final List<Widget> screens = [
     Container(color: Colors.blue),
     Container(color: Colors.yellow),
-    const ScanQrScreen(),
+    BlocProvider(
+      create: (context) => ScanQrCubit(
+        scannerController: MobileScannerController(
+          facing: CameraFacing.back,
+          torchEnabled: false,
+          returnImage: false,
+          detectionSpeed: DetectionSpeed.noDuplicates,
+        ),
+      ),
+      child: const ScanQrScreen(),
+    ),
   ];
 
   final List<String> icons = [AppAssets.qr, AppAssets.history];

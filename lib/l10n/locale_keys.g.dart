@@ -39,5 +39,7 @@ abstract class  LocaleKeys {
   static const data = 'data';
   static const show_qr_code = 'show_qr_code';
   static const qr_code = 'qr_code';
+  static const language = 'language';
+  static const choose_your_preferred_language = 'choose_your_preferred_language';
 
 }
