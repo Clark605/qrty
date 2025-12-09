@@ -28,4 +28,5 @@ class AppAssets {
   static const String website = 'assets/icons/website.svg';
   static const String whatsapp = 'assets/icons/whatsapp.svg';
   static const String wifi = 'assets/icons/wifi.svg';
+  static const String settings = 'assets/icons/settings.svg';
 }

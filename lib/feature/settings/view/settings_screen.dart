@@ -39,9 +39,7 @@ class SettingsScreen extends StatelessWidget {
           builder: (context, state) {
             if (state.isLoading) {
               return const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
+                child: CircularProgressIndicator(color: AppColors.primary),
               );
             }
 
@@ -53,7 +51,7 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Settings Section
-                  SettingsSectionHeader(title: LocaleKeys.settings.tr()),
+                  SectionHeader(title: LocaleKeys.settings.tr()),
                   SettingsToggleItem(
                     icon: AppAssets.vibrate,
                     title: LocaleKeys.vibrate.tr(),
@@ -61,11 +59,7 @@ class SettingsScreen extends StatelessWidget {
                     value: state.isVibrateEnabled,
                     onChanged: (_) => cubit.toggleVibrate(),
                   ),
-                  Divider(
-                    color: AppColors.primary.withOpacity(0.3),
-                    indent: context.wp(14),
-                    thickness: 1,
-                  ),
+                  MyDivider(),
                   SettingsToggleItem(
                     icon: AppAssets.notification,
                     title: LocaleKeys.beep.tr(),
@@ -73,34 +67,34 @@ class SettingsScreen extends StatelessWidget {
                     value: state.isBeepEnabled,
                     onChanged: (_) => cubit.toggleBeep(),
                   ),
+                  MyDivider(),
+                  SettingsToggleItem(
+                    icon: AppAssets.text,
+                    title: LocaleKeys.language.tr(),
+                    subtitle: LocaleKeys.choose_your_preferred_language.tr(),
+                    onTap: () => cubit.showLanguageSelectionDialog(context),
+                  ),
 
                   SizedBox(height: context.hp(2)),
 
                   // Support Section
-                  SettingsSectionHeader(title: LocaleKeys.support.tr()),
-                  SettingsNavigationItem(
+                  SectionHeader(title: LocaleKeys.support.tr()),
+                  NavigationItem(
                     icon: AppAssets.rate,
                     title: LocaleKeys.rate_us.tr(),
                     subtitle: LocaleKeys.your_best_reward_to_us.tr(),
                     onTap: () => _openStoreUrl(context),
                   ),
-                  Divider(
-                    color: AppColors.primary.withOpacity(0.3),
-                    indent: context.wp(14),
-                    thickness: 1,
-                  ),
-                  SettingsNavigationItem(
+                  MyDivider(),
+                  NavigationItem(
                     icon: AppAssets.privacy,
                     title: LocaleKeys.privacy_policy.tr(),
-                    subtitle: LocaleKeys.follow_our_policies_that_benefits_you.tr(),
+                    subtitle: LocaleKeys.follow_our_policies_that_benefits_you
+                        .tr(),
                     onTap: () => _showPrivacyPolicyDialog(context),
                   ),
-                  Divider(
-                    color: AppColors.primary.withOpacity(0.3),
-                    indent: context.wp(14),
-                    thickness: 1,
-                  ),
-                  SettingsNavigationItem(
+                  MyDivider(),
+                  NavigationItem(
                     icon: AppAssets.share,
                     title: LocaleKeys.share.tr(),
                     subtitle: LocaleKeys.share_app_with_others.tr(),
@@ -135,9 +129,9 @@ class SettingsScreen extends StatelessWidget {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Could not open store')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Could not open store')));
       }
     }
   }
@@ -174,6 +168,19 @@ class SettingsScreen extends StatelessWidget {
     Share.share(
       'Check out QRty - The best QR code scanner app!',
       subject: 'QRty App',
+    );
+  }
+}
+
+class MyDivider extends StatelessWidget {
+  const MyDivider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      color: AppColors.primary.withOpacity(0.3),
+      indent: context.wp(14),
+      thickness: 1,
     );
   }
 }

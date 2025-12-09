@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         child: MaterialApp(
+          key: ValueKey(context.locale.toString()),
           title: 'QRty',
           theme: AppTheme.appTheme,
           supportedLocales: context.supportedLocales,

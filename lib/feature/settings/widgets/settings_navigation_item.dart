@@ -3,13 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/theme/app_colors.dart';
 
-class SettingsNavigationItem extends StatelessWidget {
+class NavigationItem extends StatelessWidget {
   final String icon;
   final String title;
   final String subtitle;
   final VoidCallback onTap;
 
-  const SettingsNavigationItem({
+  const NavigationItem({
     super.key,
     required this.icon,
     required this.title,

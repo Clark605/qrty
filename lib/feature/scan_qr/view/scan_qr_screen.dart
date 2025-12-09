@@ -83,6 +83,14 @@ class ScanQrScreen extends StatelessWidget {
                             icon: AppAssets.flipCamera,
                             onTap: cubit.toggleCamera,
                           ),
+                          ControlButton(
+                            icon: AppAssets.settings,
+                            onTap: () {
+                              context
+                                  .pushNamed(Routes.settings)
+                                  .whenComplete(() => cubit.resumeScanning());
+                            },
+                          ),
                         ],
                       ),
                     ),
