@@ -5,6 +5,8 @@ import 'package:qrty/core/common/widgets/app_background.dart';
 import 'package:qrty/core/constants/app_assets.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
+import 'package:qrty/core/extensions/navigator_extensions.dart';
+import 'package:qrty/core/routes/routes.dart';
 import 'package:qrty/core/theme/app_colors.dart';
 import 'package:qrty/feature/qr_view/cubit/qr_view_cubit.dart';
 import 'package:qrty/feature/qr_view/widgets/action_button.dart';
@@ -35,7 +37,9 @@ class QrResultScreen extends StatelessWidget {
           elevation: 0,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: AppColors.white),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => source == 'generate'
+                ? context.pushReplacementNamed(Routes.appSection)
+                : context.pop(),
           ),
           title: Text(
             LocaleKeys.result.tr(),
@@ -76,9 +80,12 @@ class QrResultScreen extends StatelessWidget {
                         label: state.showQrCode
                             ? LocaleKeys.save.tr()
                             : LocaleKeys.copy.tr(),
-                        onTap: () => state.showQrCode
-                            ? cubit.saveQrCode()
-                            : cubit.copyToClipboard(data, context),
+                        onTap: state.isSaving
+                            ? null
+                            : () => state.showQrCode
+                                  ? cubit.saveQrCode(data, context)
+                                  : cubit.copyToClipboard(data, context),
+                        isLoading: state.isSaving && state.showQrCode,
                       ),
                     ],
                   ),
