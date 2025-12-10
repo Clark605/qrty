@@ -9,7 +9,7 @@ class QrHistoryEntity {
   String data;
   int typeIndex; // Store enum index for ObjectBox compatibility
   String source; // 'scan' or 'generate'
-  
+
   @Property(type: PropertyType.date)
   DateTime timestamp;
 
