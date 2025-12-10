@@ -10,10 +10,7 @@ import 'package:qrty/l10n/locale_keys.g.dart';
 class EmptyHistoryState extends StatelessWidget {
   final HistoryTab currentTab;
 
-  const EmptyHistoryState({
-    super.key,
-    required this.currentTab,
-  });
+  const EmptyHistoryState({super.key, required this.currentTab});
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +37,9 @@ class EmptyHistoryState extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             SizedBox(height: context.hp(3)),
-            
+
             // Empty State Title
             Text(
               _getEmptyStateTitle(),
@@ -53,9 +50,9 @@ class EmptyHistoryState extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            
+
             SizedBox(height: context.hp(1)),
-            
+
             // Empty State Description
             Text(
               _getEmptyStateDescription(),

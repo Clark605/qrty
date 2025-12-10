@@ -58,9 +58,7 @@ class ScanCreateTabs extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTabChanged(tab),
       child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: context.hp(1.2),
-        ),
+        padding: EdgeInsets.symmetric(vertical: context.hp(1.2)),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primary : Colors.transparent,
           borderRadius: BorderRadius.circular(context.wp(6)),

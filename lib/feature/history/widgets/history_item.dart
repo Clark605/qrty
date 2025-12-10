@@ -63,9 +63,9 @@ class HistoryItem extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             SizedBox(width: context.wp(3)),
-            
+
             // Content (URL/Data and Date)
             Expanded(
               child: Column(
@@ -82,9 +82,9 @@ class HistoryItem extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  
+
                   SizedBox(height: context.hp(0.3)),
-                  
+
                   // Date and Source
                   Text(
                     _formatDate(historyItem.timestamp),
@@ -96,7 +96,7 @@ class HistoryItem extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             // Delete Button
             GestureDetector(
               onTap: onDelete,
