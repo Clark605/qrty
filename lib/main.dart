@@ -21,6 +21,7 @@ void main() async {
       supportedLocales: AppConstants.supportedLocales,
       fallbackLocale: AppConstants.englishLocale,
       child: DevicePreview(
+        enabled: false,
         availableLocales: AppConstants.supportedLocales,
         builder: (context) => MyApp(),
       ),

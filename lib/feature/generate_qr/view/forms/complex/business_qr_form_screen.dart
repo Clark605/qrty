@@ -23,7 +23,7 @@ class BusinessQrFormScreen extends BaseQrFormScreen {
       children: [
         // Business Name
         QrFormField(
-          label: LocaleKeys.business_name.tr(),
+          label: LocaleKeys.business_name_placeholder.tr(),
           hint: LocaleKeys.business_name_placeholder.tr(),
           fieldName: 'company',
           value: state.formData['company'],
