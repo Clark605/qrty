@@ -51,5 +51,23 @@
     "clear_scan_history" : "مسح تاريخ المسح",
     "clear_scan_history_desc" : "هل أنت متأكد من أنك تريد مسح كل تاريخ المسح؟",
     "clear_create_history" : "مسح تاريخ الإنشاء",
-    "clear_create_history_desc" : "هل أنت متأكد من أنك تريد مسح كل تاريخ الإنشاء؟"
+    "clear_create_history_desc" : "هل أنت متأكد من أنك تريد مسح كل تاريخ الإنشاء؟",
+    
+    "generate_qr_code" : "إنشاء QR",
+    "phone_number" : "رقم الهاتف",
+    "email_address" : "عنوان البريد الإلكتروني",
+    "subject" : "الموضوع",
+    "message" : "الرسالة",
+    "website_url" : "رابط الموقع",
+    "twitter_handle" : "معرف تويتر",
+    "instagram_handle" : "معرف إنستجرام",
+    "enter_text_placeholder" : "أدخل النص هنا...",
+    "email_example_placeholder" : "example@email.com",
+    "phone_placeholder" : "+1234567890",
+    "website_placeholder" : "https://example.com",
+    "handle_placeholder" : "@username أو username",
+    "address_placeholder" : "العنوان أو اسم المكان",
+    "email_subject_optional" : "موضوع البريد الإلكتروني (اختياري)",
+    "email_message_optional" : "رسالة البريد الإلكتروني (اختياري)",
+    "prefilled_message_optional" : "رسالة معبأة مسبقاً (اختياري)"
 }

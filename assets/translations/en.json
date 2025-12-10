@@ -51,5 +51,23 @@
     "clear_scan_history" : "Clear Scan History",
     "clear_scan_history_desc" : "Are you sure you want to clear all scan history?",
     "clear_create_history" : "Clear Create History",
-    "clear_create_history_desc" : "Are you sure you want to clear all create history?"
+    "clear_create_history_desc" : "Are you sure you want to clear all create history?",
+    
+    "generate_qr_code" : "Generate QR",
+    "phone_number" : "Phone Number",
+    "email_address" : "Email Address",
+    "subject" : "Subject",
+    "message" : "Message",
+    "website_url" : "Website URL",
+    "twitter_handle" : "Twitter Handle",
+    "instagram_handle" : "Instagram Handle",
+    "enter_text_placeholder" : "Enter your text here...",
+    "email_example_placeholder" : "example@email.com",
+    "phone_placeholder" : "+1234567890",
+    "website_placeholder" : "https://example.com",
+    "handle_placeholder" : "@username or username",
+    "address_placeholder" : "Address or place name",
+    "email_subject_optional" : "Email subject (optional)",
+    "email_message_optional" : "Email message (optional)",
+    "prefilled_message_optional" : "Pre-filled message (optional)"
 }

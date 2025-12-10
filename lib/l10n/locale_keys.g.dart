@@ -56,5 +56,22 @@ abstract class  LocaleKeys {
   static const clear_scan_history_desc = 'clear_scan_history_desc';
   static const clear_create_history = 'clear_create_history';
   static const clear_create_history_desc = 'clear_create_history_desc';
+  static const generate_qr_code = 'generate_qr_code';
+  static const phone_number = 'phone_number';
+  static const email_address = 'email_address';
+  static const subject = 'subject';
+  static const message = 'message';
+  static const website_url = 'website_url';
+  static const twitter_handle = 'twitter_handle';
+  static const instagram_handle = 'instagram_handle';
+  static const enter_text_placeholder = 'enter_text_placeholder';
+  static const email_example_placeholder = 'email_example_placeholder';
+  static const phone_placeholder = 'phone_placeholder';
+  static const website_placeholder = 'website_placeholder';
+  static const handle_placeholder = 'handle_placeholder';
+  static const address_placeholder = 'address_placeholder';
+  static const email_subject_optional = 'email_subject_optional';
+  static const email_message_optional = 'email_message_optional';
+  static const prefilled_message_optional = 'prefilled_message_optional';
 
 }
