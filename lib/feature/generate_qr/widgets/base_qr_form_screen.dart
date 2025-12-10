@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qrty/core/common/widgets/app_background.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
+import 'package:qrty/core/routes/routes.dart';
 import 'package:qrty/core/theme/app_colors.dart';
 import 'package:qrty/feature/generate_qr/cubit/generate_qr_cubit.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
@@ -41,7 +42,25 @@ abstract class BaseQrFormScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
-        body: BlocBuilder<GenerateQrCubit, GenerateQrState>(
+        body: BlocConsumer<GenerateQrCubit, GenerateQrState>(
+          listener: (context, state) {
+            if (state.status == GenerateQrStatus.success) {
+              // Navigate to QR result screen
+              Navigator.pushNamed(
+                context,
+                Routes.qrView,
+                arguments: {
+                  'data': state.generatedData,
+                  'type': state.selectedType,
+                  'timestamp': DateTime.now(),
+                  'source': 'generate',
+                },
+              ).then((_) {
+                // Reset state after viewing result
+                context.read<GenerateQrCubit>().reset();
+              });
+            }
+          },
           builder: (context, state) {
             final cubit = context.read<GenerateQrCubit>();
 
@@ -97,7 +116,7 @@ abstract class BaseQrFormScreen extends StatelessWidget {
                           state.status == GenerateQrStatus.generating ||
                               !_canGenerate(state)
                           ? null
-                          : () => _generateQr(context, cubit),
+                          : () => cubit.generateQr(),
                       child: state.status == GenerateQrStatus.generating
                           ? const SizedBox(
                               height: 20,
@@ -132,11 +151,5 @@ abstract class BaseQrFormScreen extends StatelessWidget {
     return state.formErrors.isEmpty &&
         state.formData.values.any((value) => value.trim().isNotEmpty) &&
         isFormValid(state.formData);
-  }
-
-  void _generateQr(BuildContext context, GenerateQrCubit cubit) {
-    cubit.generateQr();
-    // TODO: Navigate to QrView screen - will be implemented in final commit
-    // Navigator.pushNamed(context, Routes.qrView, arguments: {...});
   }
 }

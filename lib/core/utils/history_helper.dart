@@ -29,7 +29,7 @@ class HistoryHelper {
       await ObjectBoxService.instance.saveQrHistory(
         data: data,
         type: type,
-        source: 'create',
+        source: 'generate',
       );
     } catch (e) {
       // Log error but don't break the flow
