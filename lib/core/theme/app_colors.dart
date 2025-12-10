@@ -14,4 +14,9 @@ abstract class AppColors {
 
   static const Color titleGrey = Color(0xD9D9D9D9);
   static const Color bodyGrey = Color(0xA4A4A4A4);
+
+  // Input field colors
+  static const Color inputBackground = Color(0xFF444444);
+  static const Color inputBorder = Color(0xFF555555);
+  static const Color error = Color(0xFFFF6B6B);
 }

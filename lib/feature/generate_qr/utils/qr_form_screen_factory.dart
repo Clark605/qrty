@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
-import 'package:qrty/feature/generate_qr/view/forms/text_qr_form_screen.dart';
-import 'package:qrty/feature/generate_qr/view/forms/url_qr_form_screen.dart';
-import 'package:qrty/feature/generate_qr/view/forms/email_qr_form_screen.dart';
-import 'package:qrty/feature/generate_qr/view/forms/phone_qr_form_screen.dart';
-import 'package:qrty/feature/generate_qr/view/forms/sms_qr_form_screen.dart';
-import 'package:qrty/feature/generate_qr/view/forms/twitter_qr_form_screen.dart';
-import 'package:qrty/feature/generate_qr/view/forms/instagram_qr_form_screen.dart';
-import 'package:qrty/feature/generate_qr/view/forms/location_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/simple/text_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/simple/url_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/simple/email_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/simple/phone_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/simple/sms_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/simple/twitter_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/simple/instagram_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/simple/location_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/complex/wifi_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/complex/contact_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/complex/business_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/forms/complex/event_qr_form_screen.dart';
 
 /// Factory class to create QR form screens based on QR type
 class QrFormScreenFactory {
@@ -37,12 +41,18 @@ class QrFormScreenFactory {
       case QRCodeType.location:
         return const LocationQrFormScreen();
 
-      // Complex form types will be handled in Commit 6
+      // Complex form types
       case QRCodeType.wifi:
+        return const WifiQrFormScreen();
+
       case QRCodeType.vcard:
+        return const ContactQrFormScreen();
+
       case QRCodeType.business:
+        return const BusinessQrFormScreen();
+
       case QRCodeType.event:
-        return null; // Will be implemented in next commit
+        return const EventQrFormScreen();
     }
   }
 
