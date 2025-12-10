@@ -7,6 +7,7 @@ class AppAssets {
   static const String business = 'assets/icons/business.svg';
   static const String contact = 'assets/icons/contact.svg';
   static const String copy = 'assets/icons/copy.svg';
+  static const String delete = 'assets/icons/delete.svg';
   static const String email = 'assets/icons/email.svg';
   static const String event = 'assets/icons/event.svg';
   static const String flash = 'assets/icons/flash.svg';

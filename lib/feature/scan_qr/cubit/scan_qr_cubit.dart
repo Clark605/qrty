@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/services/feedback_service.dart';
+import 'package:qrty/core/utils/history_helper.dart';
 import 'package:qrty/core/utils/qr_code_type_detector.dart';
 import 'package:qrty/core/utils/qr_text_formatter.dart';
 
@@ -43,6 +44,9 @@ class ScanQrCubit extends Cubit<ScanQrState> {
     final qrType = QRCodeTypeDetector.detectType(barcode!.rawValue!);
     final formattedText = QrTextFormatter.formatText(barcode.rawValue!, qrType);
 
+    // Save to history
+    await _saveToHistory(barcode.rawValue!, qrType);
+
     emit(
       state.copyWith(
         isScanning: false,
@@ -65,6 +69,10 @@ class ScanQrCubit extends Cubit<ScanQrState> {
     if (pickedImage == null) return;
     final barcodes = await scannerController.analyzeImage(pickedImage.path);
     onBarcodeDetected(barcodes!);
+  }
+
+  Future<void> _saveToHistory(String data, QRCodeType type) async {
+    await HistoryHelper.saveScannedQr(data: data, type: type);
   }
 
   @override

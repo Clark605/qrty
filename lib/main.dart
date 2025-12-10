@@ -4,11 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:qrty/core/constants/app_constants.dart';
 import 'package:qrty/core/routes/app_router.dart';
 import 'package:qrty/core/routes/routes.dart';
+import 'package:qrty/core/storage/objectbox_service.dart';
 import 'package:qrty/core/theme/app_theme.dart';
+import 'core/storage/objectbox.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  // Initialize ObjectBox
+  await _initializeObjectBox();
+
   runApp(
     EasyLocalization(
       path: AppConstants.translationsPath,
@@ -20,6 +26,13 @@ void main() async {
       ),
     ),
   );
+}
+
+// Initialize ObjectBox store
+Future<void> _initializeObjectBox() async {
+  // Initialize ObjectBox with the generated store
+  final store = await openStore();
+  ObjectBoxService.instance.initializeWithStore(store);
 }
 
 class MyApp extends StatelessWidget {

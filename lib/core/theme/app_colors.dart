@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   static const Color primary = Color(0xFFFDB623);
+  static const Gradient primaryGradient = LinearGradient(
+    colors: [AppColors.primary, AppColors.secondary],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    stops: [0, 1.0],
+  );
   static const Color secondary = Color(0xFF333333);
   static const Color white = Color(0xFFFFFFFF);
   static const Color background = Color(0xDD333333);

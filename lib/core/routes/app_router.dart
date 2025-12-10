@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/routes/animation_route.dart';
 import 'package:qrty/core/routes/routes.dart';
 import 'package:qrty/feature/app_section/view/app_section.dart';
 import 'package:qrty/feature/qr_view/cubit/qr_view_cubit.dart';
 import 'package:qrty/feature/qr_view/view/qr_view_screen.dart';
-import 'package:qrty/feature/scan_qr/cubit/scan_qr_cubit.dart';
-import 'package:qrty/feature/scan_qr/view/scan_qr_screen.dart';
 import 'package:qrty/feature/settings/cubit/settings_cubit.dart';
 import 'package:qrty/feature/settings/view/settings_screen.dart';
 import 'package:qrty/feature/splash/splash_screen.dart';
