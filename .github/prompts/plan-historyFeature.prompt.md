@@ -37,7 +37,6 @@ Implement a comprehensive QR code history tracking system with ObjectBox local d
 
 ### Commit 6: Replace app section placeholder and navigation
 - Replace `Container(color: Colors.yellow)` at index 1 in `lib/feature/app_section/view/app_section.dart` with `BlocProvider` wrapping `HistoryScreen`
-- Add history route case in `lib/core/routes/app_router.dart` using `AnimationRoute` with proper state management
 - Update translations in `en.json`/`ar.json` for history-related text and add missing keys to `locale_keys.g.dart`
 - Test navigation between Generate tab (index 0), History tab (index 1), and Scan tab (index 2)
 
