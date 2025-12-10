@@ -98,6 +98,92 @@ class QrTextFormatter {
 
       case QRCodeType.text:
         return text;
+
+      case QRCodeType.event:
+        // Parse iCal format and extract key information
+        final lines = text.split('\n');
+        String summary = '';
+        String dtstart = '';
+        String dtend = '';
+        String location = '';
+
+        for (final line in lines) {
+          if (line.startsWith('SUMMARY:')) {
+            summary = line.substring(8);
+          } else if (line.startsWith('DTSTART:')) {
+            dtstart = line.substring(8);
+          } else if (line.startsWith('DTEND:')) {
+            dtend = line.substring(6);
+          } else if (line.startsWith('LOCATION:')) {
+            location = line.substring(9);
+          }
+        }
+
+        final parts = <String>[];
+        if (summary.isNotEmpty) parts.add('Event: $summary');
+        if (dtstart.isNotEmpty) parts.add('Start: $dtstart');
+        if (dtend.isNotEmpty) parts.add('End: $dtend');
+        if (location.isNotEmpty) parts.add('Location: $location');
+
+        return parts.isEmpty ? text : parts.join('\n');
+
+      case QRCodeType.business:
+        // Parse business card (similar to vCard but with business focus)
+        final lines = text.split('\n');
+        String company = '';
+        String name = '';
+        String title = '';
+        String phone = '';
+        String email = '';
+        String website = '';
+
+        for (final line in lines) {
+          if (line.startsWith('ORG:')) {
+            company = line.substring(4);
+          } else if (line.startsWith('FN:')) {
+            name = line.substring(3);
+          } else if (line.startsWith('TITLE:')) {
+            title = line.substring(6);
+          } else if (line.startsWith('TEL')) {
+            phone = line.split(':').last;
+          } else if (line.startsWith('EMAIL')) {
+            email = line.split(':').last;
+          } else if (line.startsWith('URL:')) {
+            website = line.substring(4);
+          }
+        }
+
+        final parts = <String>[];
+        if (company.isNotEmpty) parts.add('Company: $company');
+        if (name.isNotEmpty) parts.add('Name: $name');
+        if (title.isNotEmpty) parts.add('Title: $title');
+        if (phone.isNotEmpty) parts.add('Phone: $phone');
+        if (email.isNotEmpty) parts.add('Email: $email');
+        if (website.isNotEmpty) parts.add('Website: $website');
+
+        return parts.isEmpty ? text : parts.join('\n');
+
+      case QRCodeType.twitter:
+        // Extract Twitter handle from URL or @handle format
+        if (text.startsWith('https://twitter.com/') ||
+            text.startsWith('https://x.com/')) {
+          final handle = text.split('/').last;
+          return '@$handle';
+        } else if (text.startsWith('@')) {
+          return text;
+        }
+        return '@$text';
+
+      case QRCodeType.instagram:
+        // Extract Instagram handle from URL or @handle format
+        if (text.startsWith('https://instagram.com/') ||
+            text.startsWith('https://www.instagram.com/')) {
+          final handle = text.split('/').last;
+          return '@$handle';
+        } else if (text.startsWith('@')) {
+          return text;
+        }
+        return '@$text';
     }
   }
 }

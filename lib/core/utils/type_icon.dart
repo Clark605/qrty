@@ -18,6 +18,14 @@ abstract class TypeIcon {
         return AppAssets.contact;
       case QRCodeType.location:
         return AppAssets.location;
+      case QRCodeType.event:
+        return AppAssets.event;
+      case QRCodeType.business:
+        return AppAssets.business;
+      case QRCodeType.twitter:
+        return AppAssets.twitter;
+      case QRCodeType.instagram:
+        return AppAssets.instagram;
       default:
         return AppAssets.text;
     }
