@@ -36,5 +36,11 @@
     "show_qr_code" : "عرض رمز QR",
     "qr_code" : "رمز QR",
     "language" : "اللغة",
-    "choose_your_preferred_language" : "اختر لغتك المفضلة."
+    "choose_your_preferred_language" : "اختر لغتك المفضلة.",
+    "no_scan_history" : "لا يوجد تاريخ مسح",
+    "no_scan_history_desc" : "لم تقم بمسح أي رمز QR بعد. ابدأ المسح لرؤية تاريخك هنا.",
+    "no_create_history" : "لا يوجد تاريخ إنشاء",
+    "no_create_history_desc" : "لم تنشئ أي رمز QR بعد. ابدأ الإنشاء لرؤية تاريخك هنا.",
+    "create" : "إنشاء",
+    "scan" : "مسح"
 }

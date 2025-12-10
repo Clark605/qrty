@@ -36,5 +36,11 @@
     "show_qr_code" : "Show QR Code",
     "qr_code" : "QR Code",
     "language" : "Language",
-    "choose_your_preferred_language" : "Choose your preferred language."
+    "choose_your_preferred_language" : "Choose your preferred language.",
+    "no_scan_history" : "No Scan History",
+    "no_scan_history_desc" : "You haven't scanned any QR codes yet. Start scanning to see your history here.",
+    "no_create_history" : "No Create History", 
+    "no_create_history_desc" : "You haven't created any QR codes yet. Start creating to see your history here.",
+    "create" : "Create",
+    "scan" : "Scan"
 }

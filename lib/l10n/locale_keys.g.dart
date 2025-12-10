@@ -41,5 +41,11 @@ abstract class  LocaleKeys {
   static const qr_code = 'qr_code';
   static const language = 'language';
   static const choose_your_preferred_language = 'choose_your_preferred_language';
+  static const no_scan_history = 'no_scan_history';
+  static const no_scan_history_desc = 'no_scan_history_desc';
+  static const no_create_history = 'no_create_history';
+  static const no_create_history_desc = 'no_create_history_desc';
+  static const create = 'create';
+  static const scan = 'scan';
 
 }
