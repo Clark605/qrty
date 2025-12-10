@@ -42,5 +42,14 @@
     "no_create_history" : "لا يوجد تاريخ إنشاء",
     "no_create_history_desc" : "لم تنشئ أي رمز QR بعد. ابدأ الإنشاء لرؤية تاريخك هنا.",
     "create" : "إنشاء",
-    "scan" : "مسح"
+    "scan" : "مسح",
+    "delete_item" : "حذف العنصر",
+    "delete_item_desc" : "هل أنت متأكد من أنك تريد حذف عنصر التاريخ هذا؟",
+    "cancel" : "إلغاء",
+    "delete" : "حذف",
+    "clear" : "مسح",
+    "clear_scan_history" : "مسح تاريخ المسح",
+    "clear_scan_history_desc" : "هل أنت متأكد من أنك تريد مسح كل تاريخ المسح؟",
+    "clear_create_history" : "مسح تاريخ الإنشاء",
+    "clear_create_history_desc" : "هل أنت متأكد من أنك تريد مسح كل تاريخ الإنشاء؟"
 }

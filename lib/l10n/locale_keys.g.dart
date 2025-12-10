@@ -47,5 +47,14 @@ abstract class  LocaleKeys {
   static const no_create_history_desc = 'no_create_history_desc';
   static const create = 'create';
   static const scan = 'scan';
+  static const delete_item = 'delete_item';
+  static const delete_item_desc = 'delete_item_desc';
+  static const cancel = 'cancel';
+  static const delete = 'delete';
+  static const clear = 'clear';
+  static const clear_scan_history = 'clear_scan_history';
+  static const clear_scan_history_desc = 'clear_scan_history_desc';
+  static const clear_create_history = 'clear_create_history';
+  static const clear_create_history_desc = 'clear_create_history_desc';
 
 }
