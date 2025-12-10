@@ -72,10 +72,7 @@ class ScanQrCubit extends Cubit<ScanQrState> {
   }
 
   Future<void> _saveToHistory(String data, QRCodeType type) async {
-    await HistoryHelper.saveScannedQr(
-      data: data,
-      type: type,
-    );
+    await HistoryHelper.saveScannedQr(data: data, type: type);
   }
 
   @override

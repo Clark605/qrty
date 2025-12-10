@@ -36,6 +36,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          leading: SizedBox.shrink(),
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: false,
