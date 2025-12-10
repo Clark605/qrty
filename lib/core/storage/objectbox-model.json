@@ -1,0 +1,52 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5663753991889772059",
+      "lastPropertyId": "5:2498122976890829487",
+      "name": "QrHistoryEntity",
+      "properties": [
+        {
+          "id": "1:3123333982288313064",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3701087045967579645",
+          "name": "data",
+          "type": 9
+        },
+        {
+          "id": "3:8278625045977665104",
+          "name": "typeIndex",
+          "type": 6
+        },
+        {
+          "id": "4:7762335204227048235",
+          "name": "source",
+          "type": 9
+        },
+        {
+          "id": "5:2498122976890829487",
+          "name": "timestamp",
+          "type": 10
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:5663753991889772059",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
