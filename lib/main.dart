@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:qrty/core/constants/app_constants.dart';
 import 'package:qrty/core/routes/app_router.dart';
 import 'package:qrty/core/routes/routes.dart';
+import 'package:qrty/core/services/preferences_service.dart';
 import 'package:qrty/core/storage/objectbox_service.dart';
 import 'package:qrty/core/theme/app_theme.dart';
 import 'core/storage/objectbox.g.dart';
@@ -12,7 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  // Initialize ObjectBox
+  // Initialize services
+  await PreferencesService.initialize();
   await _initializeObjectBox();
 
   runApp(
@@ -21,6 +23,7 @@ void main() async {
       supportedLocales: AppConstants.supportedLocales,
       fallbackLocale: AppConstants.englishLocale,
       child: DevicePreview(
+        enabled: false,
         availableLocales: AppConstants.supportedLocales,
         builder: (context) => MyApp(),
       ),
@@ -35,6 +38,16 @@ Future<void> _initializeObjectBox() async {
   ObjectBoxService.instance.initializeWithStore(store);
 }
 
+String getInitialRoute() {
+  // Check if this is the first launch
+  if (PreferencesService.isFirstLaunch) {
+    return Routes.splash;
+  }
+
+  // Return main app section for subsequent launches
+  return Routes.appSection;
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -47,13 +60,14 @@ class MyApp extends StatelessWidget {
           ),
         ),
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           key: ValueKey(context.locale.toString()),
           title: 'QRty',
           theme: AppTheme.appTheme,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           localizationsDelegates: context.localizationDelegates,
-          initialRoute: Routes.appSection,
+          initialRoute: getInitialRoute(),
           onGenerateRoute: AppRouter.generateRoute,
         ),
       ),

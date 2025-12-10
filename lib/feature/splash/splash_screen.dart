@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:qrty/core/common/widgets/fab.dart';
@@ -5,6 +7,7 @@ import 'package:qrty/core/constants/app_assets.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/extensions/navigator_extensions.dart';
 import 'package:qrty/core/routes/routes.dart';
+import 'package:qrty/core/services/preferences_service.dart';
 import 'package:qrty/core/theme/app_colors.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
@@ -65,8 +68,15 @@ class SplashScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       Fab(
-                        onPressed: () {
-                          context.pushReplacementNamed(Routes.appSection);
+                        onPressed: () async {
+                          // Mark first launch as completed
+                          await PreferencesService.markFirstLaunchCompleted();
+                          log('First launch marked as completed');
+
+                          // Navigate to main app section
+                          if (context.mounted) {
+                            context.pushReplacementNamed(Routes.appSection);
+                          }
                         },
                       ),
                     ],
