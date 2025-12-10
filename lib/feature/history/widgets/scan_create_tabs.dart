@@ -24,7 +24,7 @@ class ScanCreateTabs extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: const Color(0xff3C3C3C),
-        borderRadius: BorderRadius.circular(context.wp(6)),
+        borderRadius: BorderRadius.circular(context.wp(2)),
       ),
       child: Row(
         children: [
@@ -59,15 +59,16 @@ class ScanCreateTabs extends StatelessWidget {
       onTap: () => onTabChanged(tab),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: context.hp(1.2)),
+        margin: EdgeInsets.all(context.wp(1)),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary : Colors.transparent,
-          borderRadius: BorderRadius.circular(context.wp(6)),
+          gradient: isSelected ? AppColors.primaryGradient : null,
+          borderRadius: BorderRadius.circular(context.wp(2)),
         ),
         child: Center(
           child: Text(
             title,
             style: TextStyle(
-              color: isSelected ? AppColors.secondary : AppColors.bodyGrey,
+              color: AppColors.white,
               fontSize: context.sp(16),
               fontWeight: FontWeight.w600,
             ),

@@ -72,47 +72,59 @@ class HistoryItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // URL/Data Text
-                  Text(
-                    historyItem.data,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: context.sp(16),
-                      fontWeight: FontWeight.w500,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        historyItem.data,
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: context.sp(16),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      GestureDetector(
+                        onTap: onDelete,
+                        child: Container(
+                          padding: EdgeInsets.all(context.wp(2)),
+                          child: SvgPicture.asset(
+                            AppAssets.delete,
+                            colorFilter: const ColorFilter.mode(
+                              AppColors.primary,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-
-                  SizedBox(height: context.hp(0.3)),
-
                   // Date and Source
-                  Text(
-                    _formatDate(historyItem.timestamp),
-                    style: TextStyle(
-                      color: AppColors.bodyGrey,
-                      fontSize: context.sp(12),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        historyItem.type.name,
+                        style: TextStyle(
+                          color: AppColors.bodyGrey,
+                          fontSize: context.sp(12),
+                        ),
+                      ),
+                      Text(
+                        _formatDate(historyItem.timestamp),
+                        style: TextStyle(
+                          color: AppColors.bodyGrey,
+                          fontSize: context.sp(12),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
 
             // Delete Button
-            GestureDetector(
-              onTap: onDelete,
-              child: Container(
-                padding: EdgeInsets.all(context.wp(2)),
-                child: SvgPicture.asset(
-                  AppAssets.delete,
-                  width: context.wp(5),
-                  height: context.wp(5),
-                  colorFilter: const ColorFilter.mode(
-                    AppColors.primary,
-                    BlendMode.srcIn,
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
