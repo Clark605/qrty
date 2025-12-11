@@ -1,32 +1,31 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
-import 'package:qrty/core/services/feedback_service.dart';
-import 'package:qrty/core/utils/history_helper.dart';
+
 import 'package:qrty/core/utils/qr_code_type_detector.dart';
 import 'package:qrty/core/utils/qr_text_formatter.dart';
+import 'package:qrty/feature/scan_qr/data/services/scan_service.dart';
 
 part 'scan_qr_state.dart';
 
 class ScanQrCubit extends Cubit<ScanQrState> {
-  final MobileScannerController scannerController;
+  final ScanService scanService;
 
-  ScanQrCubit({required this.scannerController}) : super(const ScanQrState());
+  ScanQrCubit({required this.scanService}) : super(const ScanQrState());
 
   void toggleFlash() {
-    scannerController.toggleTorch();
+    scanService.toggleFlash();
     emit(state.copyWith(isFlashOn: !state.isFlashOn));
   }
 
   void toggleCamera() {
-    scannerController.switchCamera();
+    scanService.toggleCamera();
     emit(state.copyWith(isFrontCamera: !state.isFrontCamera));
   }
 
   void updateZoom(double value) {
-    scannerController.setZoomScale(value);
+    scanService.updateZoom(value);
     emit(state.copyWith(zoomLevel: value));
   }
 
@@ -34,18 +33,10 @@ class ScanQrCubit extends Cubit<ScanQrState> {
     if (!state.isScanning) return;
 
     final barcode = barcodeCapture.barcodes.firstOrNull;
-    if (barcode?.rawValue == null) return;
-
     emit(state.copyWith(isScanning: false));
-
-    // Play feedback based on user settings
-    await FeedbackService.instance.playFeedback();
-
+    scanService.onBarcodeDetected(barcodeCapture);
     final qrType = QRCodeTypeDetector.detectType(barcode!.rawValue!);
     final formattedText = QrTextFormatter.formatText(barcode.rawValue!, qrType);
-
-    // Save to history
-    await _saveToHistory(barcode.rawValue!, qrType);
 
     emit(
       state.copyWith(
@@ -63,21 +54,7 @@ class ScanQrCubit extends Cubit<ScanQrState> {
   }
 
   void pickImageFromGallery() async {
-    final pickedImage = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedImage == null) return;
-    final barcodes = await scannerController.analyzeImage(pickedImage.path);
+    final barcodes = await scanService.pickImageFromGallery();
     onBarcodeDetected(barcodes!);
-  }
-
-  Future<void> _saveToHistory(String data, QRCodeType type) async {
-    await HistoryHelper.saveScannedQr(data: data, type: type);
-  }
-
-  @override
-  Future<void> close() {
-    scannerController.dispose();
-    return super.close();
   }
 }

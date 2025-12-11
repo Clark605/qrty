@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qrty/core/common/widgets/fab.dart';
 import 'package:qrty/core/constants/app_assets.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
@@ -13,7 +12,8 @@ import 'package:qrty/feature/generate_qr/cubit/generate_qr_cubit.dart';
 import 'package:qrty/feature/generate_qr/view/generate_qr_screen.dart';
 import 'package:qrty/feature/history/cubit/history_cubit.dart';
 import 'package:qrty/feature/history/view/history_screen.dart';
-import 'package:qrty/feature/scan_qr/cubit/scan_qr_cubit.dart';
+import 'package:qrty/feature/scan_qr/data/services/scan_service.dart';
+import 'package:qrty/feature/scan_qr/view_model/scan_qr_cubit.dart';
 import 'package:qrty/feature/scan_qr/view/scan_qr_screen.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
@@ -38,14 +38,7 @@ class AppSectionState extends State<AppSection> {
       child: const HistoryScreen(),
     ),
     BlocProvider(
-      create: (context) => ScanQrCubit(
-        scannerController: MobileScannerController(
-          facing: CameraFacing.back,
-          torchEnabled: false,
-          returnImage: false,
-          detectionSpeed: DetectionSpeed.noDuplicates,
-        ),
-      ),
+      create: (context) => ScanQrCubit(scanService: ScanService()),
       child: const ScanQrScreen(),
     ),
   ];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/theme/app_colors.dart';
-import 'package:qrty/feature/scan_qr/cubit/scan_qr_cubit.dart';
+import 'package:qrty/feature/scan_qr/view_model/scan_qr_cubit.dart';
 
 class ZoomSlider extends StatelessWidget {
   const ZoomSlider({required this.cubit, required this.state, super.key});
