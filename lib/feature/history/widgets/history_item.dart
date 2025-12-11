@@ -75,15 +75,17 @@ class HistoryItem extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        historyItem.data,
-                        style: TextStyle(
-                          color: AppColors.white,
-                          fontSize: context.sp(16),
-                          fontWeight: FontWeight.w500,
+                      Flexible(
+                        child: Text(
+                          historyItem.data,
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: context.sp(16),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                       ),
                       GestureDetector(
                         onTap: onDelete,

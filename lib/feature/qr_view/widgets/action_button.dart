@@ -6,13 +6,15 @@ import 'package:qrty/core/theme/app_colors.dart';
 class ActionButton extends StatelessWidget {
   final String icon;
   final String label;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final bool isLoading;
 
   const ActionButton({
     super.key,
     required this.icon,
     required this.label,
     required this.onTap,
+    this.isLoading = false,
   });
 
   @override
@@ -24,18 +26,31 @@ class ActionButton extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(context.hp(2)),
             decoration: BoxDecoration(
-              color: AppColors.primary,
+              color: onTap == null
+                  ? AppColors.primary.withOpacity(0.5)
+                  : AppColors.primary,
               borderRadius: BorderRadius.circular(context.wp(3)),
             ),
-            child: SvgPicture.asset(
-              icon,
-              width: context.wp(8),
-              height: context.wp(8),
-              colorFilter: const ColorFilter.mode(
-                AppColors.secondary,
-                BlendMode.srcIn,
-              ),
-            ),
+            child: isLoading
+                ? SizedBox(
+                    width: context.wp(8),
+                    height: context.wp(8),
+                    child: const CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppColors.secondary,
+                      ),
+                    ),
+                  )
+                : SvgPicture.asset(
+                    icon,
+                    width: context.wp(8),
+                    height: context.wp(8),
+                    colorFilter: const ColorFilter.mode(
+                      AppColors.secondary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
           ),
           SizedBox(height: context.hp(1)),
           Text(

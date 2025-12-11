@@ -25,6 +25,7 @@ class AppAssets {
   static const String share = 'assets/icons/share.svg';
   static const String telephone = 'assets/icons/telephone.svg';
   static const String text = 'assets/icons/text.svg';
+  static const String twitter = 'assets/icons/twitter.svg';
   static const String vibrate = 'assets/icons/vibrate.svg';
   static const String website = 'assets/icons/website.svg';
   static const String whatsapp = 'assets/icons/whatsapp.svg';
