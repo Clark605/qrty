@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qrty/core/theme/app_colors.dart';
 
 abstract class AppDialogs {
   static void showInfoMessage(BuildContext context, String message) {
@@ -35,5 +36,23 @@ abstract class AppDialogs {
         ),
       );
     }
+  }
+
+  static Future<T?> selectionDialog<T>({
+    required BuildContext context,
+    required title,
+    required List<Widget> options,
+  }) {
+    return showDialog<T>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: AppColors.background,
+
+          title: title,
+          content: SingleChildScrollView(child: ListBody(children: options)),
+        );
+      },
+    );
   }
 }

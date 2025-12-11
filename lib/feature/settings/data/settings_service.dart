@@ -2,9 +2,6 @@ import 'package:qrty/core/models/settings_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsService {
-  SettingsService._internal();
-  static final SettingsService instance = SettingsService._internal();
-
   static const String _keyVibrateEnabled = 'vibrate_enabled';
   static const String _keyBeepEnabled = 'beep_enabled';
 

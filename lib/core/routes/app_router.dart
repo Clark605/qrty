@@ -7,7 +7,7 @@ import 'package:qrty/feature/app_section/view/app_section.dart';
 import 'package:qrty/feature/qr_view/view_model/qr_view_cubit.dart';
 import 'package:qrty/feature/qr_view/data/services/view_service.dart';
 import 'package:qrty/feature/qr_view/view/qr_view_screen.dart';
-import 'package:qrty/feature/settings/cubit/settings_cubit.dart';
+import 'package:qrty/feature/settings/view_model/settings_cubit.dart';
 import 'package:qrty/feature/settings/view/settings_screen.dart';
 import 'package:qrty/feature/splash/splash_screen.dart';
 

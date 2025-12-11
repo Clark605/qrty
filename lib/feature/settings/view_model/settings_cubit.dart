@@ -4,21 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qrty/core/constants/app_constants.dart';
 import 'package:qrty/core/constants/app_fonts.dart';
-import 'package:qrty/core/services/settings_service.dart';
+import 'package:qrty/core/dialogs/app_dialogs.dart';
+import 'package:qrty/feature/settings/data/settings_service.dart';
 import 'package:qrty/core/theme/app_colors.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
 part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
-  SettingsCubit() : super(const SettingsState()) {
+  final SettingsService settingsService;
+  SettingsCubit(this.settingsService) : super(const SettingsState()) {
     loadSettings();
   }
 
   /// Load settings from SharedPreferences
   Future<void> loadSettings() async {
     try {
-      final settings = await SettingsService.instance.getSettings();
+      final settings = await settingsService.getSettings();
       emit(
         state.copyWith(
           isVibrateEnabled: settings.isVibrateEnabled,
@@ -36,39 +38,34 @@ class SettingsCubit extends Cubit<SettingsState> {
   Future<void> toggleVibrate() async {
     final newValue = !state.isVibrateEnabled;
     emit(state.copyWith(isVibrateEnabled: newValue));
-    await SettingsService.instance.saveVibrate(newValue);
+    await settingsService.saveVibrate(newValue);
   }
 
   /// Toggle beep setting
   Future<void> toggleBeep() async {
     final newValue = !state.isBeepEnabled;
     emit(state.copyWith(isBeepEnabled: newValue));
-    await SettingsService.instance.saveBeep(newValue);
+    await settingsService.saveBeep(newValue);
   }
 
   Future<void> showLanguageSelectionDialog(BuildContext context) async {
-    final selectedLocale = await showDialog<Locale>(
+    final selectedLocale = await AppDialogs.selectionDialog<Locale>(
       context: context,
-      builder: (context) {
-        return SimpleDialog(
-          backgroundColor: AppColors.background,
-          title: Text(
-            LocaleKeys.language.tr(),
-            style: TextStyle(color: AppColors.white, fontFamily: AppFonts.itim),
+      title: Text(
+        LocaleKeys.language.tr(),
+        style: TextStyle(color: AppColors.white, fontFamily: AppFonts.itim),
+      ),
+      options: AppConstants.supportedLocales.map((locale) {
+        return SimpleDialogOption(
+          onPressed: () {
+            Navigator.pop(context, locale);
+          },
+          child: Text(
+            locale.languageCode == 'en' ? 'English' : 'العربية',
+            style: TextStyle(color: AppColors.white),
           ),
-          children: AppConstants.supportedLocales.map((locale) {
-            return SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context, locale);
-              },
-              child: Text(
-                locale.languageCode == 'en' ? 'English' : 'العربية',
-                style: TextStyle(color: AppColors.white),
-              ),
-            );
-          }).toList(),
         );
-      },
+      }).toList(),
     );
     context.setLocale(selectedLocale ?? state.locale);
     emit(state.copyWith(locale: selectedLocale ?? state.locale));
