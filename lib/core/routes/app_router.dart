@@ -4,7 +4,8 @@ import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/routes/animation_route.dart';
 import 'package:qrty/core/routes/routes.dart';
 import 'package:qrty/feature/app_section/view/app_section.dart';
-import 'package:qrty/feature/qr_view/cubit/qr_view_cubit.dart';
+import 'package:qrty/feature/qr_view/view_model/qr_view_cubit.dart';
+import 'package:qrty/feature/qr_view/data/services/view_service.dart';
 import 'package:qrty/feature/qr_view/view/qr_view_screen.dart';
 import 'package:qrty/feature/settings/cubit/settings_cubit.dart';
 import 'package:qrty/feature/settings/view/settings_screen.dart';
@@ -21,7 +22,7 @@ class AppRouter {
       case Routes.qrView:
         return AnimationRoute(
           page: BlocProvider(
-            create: (context) => QrViewCubit(),
+            create: (context) => QrViewCubit(ViewService()),
             child: QrResultScreen(
               data: arg['data'] as String,
               timestamp: arg['timestamp'] as DateTime,

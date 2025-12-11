@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/storage/objectbox_service.dart';
 
@@ -16,7 +18,7 @@ class HistoryHelper {
       );
     } catch (e) {
       // Log error but don't break the flow
-      print('Error saving scanned QR to history: $e');
+      log('Error saving scanned QR to history: $e');
     }
   }
 
@@ -33,7 +35,7 @@ class HistoryHelper {
       );
     } catch (e) {
       // Log error but don't break the flow
-      print('Error saving created QR to history: $e');
+      log('Error saving created QR to history: $e');
     }
   }
 }
