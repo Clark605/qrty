@@ -28,21 +28,105 @@ The project follows MVVM approach, separating concerns for better maintainabilit
 
 ```
 lib/
-├── core/                   # Shared resources and utilities
-│   ├── common/             # Common widgets and constants
-│   ├── routes/             # Navigation configuration
-│   ├── services/           # Global services
-│   ├── storage/            # Database configuration
-│   └── theme/              # App theming and styles
-├── feature/                # Feature-based modules
-│   ├── app_section/        # Main app container/navigation
-│   ├── generate_qr/        # QR Generation logic and UI
-│   ├── history/            # History management
-│   ├── scan_qr/            # QR Scanning implementation
-│   ├── settings/           # App settings
-│   └── splash/             # Splash screen
-├── l10n/                   # Localization files
-└── main.dart               # Application entry point
+├── core/                             # Shared resources and utilities
+│   ├── common/
+│   │   └── widgets/                 # Shared UI components
+│   │       ├── app_background.dart  # App background widget
+│   │       └── fab.dart             # Floating action button
+│   ├── constants/
+│   │   ├── app_assets.dart          # Asset paths and constants
+│   │   ├── app_colors.dart          # Color palette
+│   │   └── app_dimensions.dart      # Spacing and sizing
+│   ├── dialogs/
+│   │   └── app_dialogs.dart         # Reusable dialog components
+│   ├── enums/
+│   │   └── qr_code_type_enum.dart   # QR code type enumeration
+│   ├── extensions/
+│   │   ├── media_query_extensions.dart  # Responsive sizing (wp, hp, sp)
+│   │   ├── navigator_extensions.dart    # Navigation helpers
+│   │   └── string_extensions.dart       # String utilities
+│   ├── models/
+│   │   ├── qr_history_entity.dart   # ObjectBox history entity
+│   │   └── settings_model.dart      # Settings data model
+│   ├── routes/
+│   │   ├── animation_route.dart     # Custom route animations
+│   │   ├── app_router.dart          # Central routing configuration
+│   │   └── routes.dart              # Route name constants
+│   ├── services/
+│   │   ├── feedback_service.dart    # Vibration and audio feedback
+│   │   ├── preferences_service.dart # First-launch preferences
+│   │   └── settings_service.dart    # App settings persistence
+│   ├── storage/
+│   │   └── objectbox_service.dart   # ObjectBox database service
+│   ├── theme/
+│   │   ├── app_colors.dart          # App color theme
+│   │   └── app_text_styles.dart     # Text styling
+│   └── utils/
+│       ├── history_helper.dart      # History save helpers
+│       ├── qr_code_image_generator.dart  # QR image generation
+│       ├── qr_code_type_detector.dart    # QR type detection
+│       ├── qr_content_generator.dart     # QR content creation
+│       └── qr_text_formatter.dart        # QR data formatting
+├── feature/                          # Feature-based modules
+│   ├── app_section/
+│   │   └── view/
+│   │       └── app_section.dart     # Main app container with bottom nav
+│   ├── generate_qr/                 # QR Generation feature (MVVM)
+│   │   ├── data/
+│   │   │   └── services/
+│   │   │       └── generate_service.dart  # Business logic for generation
+│   │   ├── view/
+│   │   │   ├── forms/               # Dynamic form screens per QR type
+│   │   │   ├── widgets/             # Generation UI components
+│   │   │   └── generate_qr_screen.dart  # Main generation screen
+│   │   └── view_model/
+│   │       ├── generate_qr_cubit.dart    # State management
+│   │       └── generate_qr_state.dart    # State definition
+│   ├── history/                     # History management
+│   │   ├── cubit/
+│   │   │   ├── history_cubit.dart   # History state management
+│   │   │   └── history_state.dart   # History state definition
+│   │   ├── view/
+│   │   │   └── history_screen.dart  # History display screen
+│   │   └── widgets/
+│   │       ├── empty_history_state.dart  # Empty state widget
+│   │       ├── history_item.dart         # History list item
+│   │       └── scan_create_tabs.dart     # Tab switcher
+│   ├── qr_view/                     # QR display feature (MVVM)
+│   │   ├── data/
+│   │   │   └── services/
+│   │   │       └── view_service.dart     # QR view business logic
+│   │   ├── view/
+│   │   │   ├── widgets/             # QR view components
+│   │   │   └── qr_view_screen.dart  # QR result display
+│   │   └── view_model/
+│   │       ├── qr_view_cubit.dart   # View state management
+│   │       └── qr_view_state.dart   # View state definition
+│   ├── scan_qr/                     # QR Scanning feature (MVVM)
+│   │   ├── data/
+│   │   │   └── services/
+│   │   │       └── scan_service.dart     # Scanner business logic
+│   │   ├── view/
+│   │   │   ├── widgets/             # Scanner UI components
+│   │   │   └── scan_qr_screen.dart  # Camera scanner screen
+│   │   └── view_model/
+│   │       ├── scan_qr_cubit.dart   # Scanner state management
+│   │       └── scan_qr_state.dart   # Scanner state definition
+│   ├── settings/                    # App settings
+│   │   ├── cubit/
+│   │   │   ├── settings_cubit.dart  # Settings state management
+│   │   │   └── settings_state.dart  # Settings state definition
+│   │   ├── view/
+│   │   │   └── settings_screen.dart # Settings UI
+│   │   └── widgets/
+│   │       ├── settings_navigation_item.dart  # Navigation items
+│   │       ├── settings_section_header.dart   # Section headers
+│   │       └── settings_toggle_item.dart      # Toggle switches
+│   └── splash/
+│       └── splash_screen.dart       # Splash screen with first-launch logic
+├── l10n/                             # Localization
+│   └── locale_keys.g.dart           # Generated translation keys
+└── main.dart                         # Application entry point
 ```
 
 ## 🛠️ Technologies Used
@@ -76,6 +160,7 @@ Building QRTY involved mastering several key software engineering concepts:
 *   **Hardware Integration**: Handling camera permissions and streams for scanning.
 *   **Internationalization**: Setting up a robust localization system.
 *   **State Management**: Managing complex app states efficiently with Cubits and Blocs.
+*   **Testing**: Writing unit tests to ensure code quality and reliability.
 
 ## 🎥 Video Demo
 
