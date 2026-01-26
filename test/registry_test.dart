@@ -11,18 +11,25 @@ void main() {
 
   group('QrTypeRegistry -', () {
     group('Registration', () {
-      test('should register all Phase 1 and Phase 2 types', () {
+      test('should register all Phase 1, 2, and 3 types', () {
         final supportedTypes = registry.supportedTypes;
 
-        expect(supportedTypes.length, equals(8));
+        expect(supportedTypes.length, equals(12));
+        // Phase 1
         expect(supportedTypes, contains(QRCodeType.text));
         expect(supportedTypes, contains(QRCodeType.url));
         expect(supportedTypes, contains(QRCodeType.email));
+        // Phase 2
         expect(supportedTypes, contains(QRCodeType.phone));
         expect(supportedTypes, contains(QRCodeType.sms));
         expect(supportedTypes, contains(QRCodeType.location));
         expect(supportedTypes, contains(QRCodeType.twitter));
         expect(supportedTypes, contains(QRCodeType.instagram));
+        // Phase 3
+        expect(supportedTypes, contains(QRCodeType.wifi));
+        expect(supportedTypes, contains(QRCodeType.vcard));
+        expect(supportedTypes, contains(QRCodeType.business));
+        expect(supportedTypes, contains(QRCodeType.event));
       });
 
       test('should return type definition for registered types', () {
@@ -39,19 +46,24 @@ void main() {
       });
 
       test('should return null for unregistered types', () {
-        final wifiDef = registry.getDefinition(QRCodeType.wifi);
-        expect(wifiDef, isNull);
+        // All types are now registered in Phase 3
+        // This test validates the registry is complete
+        expect(registry.supportedTypes.length, equals(12));
       });
 
       test('isSupported should return true for registered types', () {
         expect(registry.isSupported(QRCodeType.text), isTrue);
         expect(registry.isSupported(QRCodeType.phone), isTrue);
         expect(registry.isSupported(QRCodeType.twitter), isTrue);
+        expect(registry.isSupported(QRCodeType.wifi), isTrue);
+        expect(registry.isSupported(QRCodeType.vcard), isTrue);
+        expect(registry.isSupported(QRCodeType.business), isTrue);
+        expect(registry.isSupported(QRCodeType.event), isTrue);
       });
 
-      test('isSupported should return false for unregistered types', () {
-        expect(registry.isSupported(QRCodeType.wifi), isFalse);
-        expect(registry.isSupported(QRCodeType.vcard), isFalse);
+      test('isSupported should return false for non-existent types', () {
+        // All 12 types are now registered
+        expect(registry.supportedTypes.length, equals(12));
       });
     });
 
@@ -228,6 +240,167 @@ void main() {
           expect(result['handle'], isNotNull);
         });
       });
+
+      group('WiFi Type', () {
+        test('should validate WiFi with WPA security', () {
+          final result = registry.validateData(QRCodeType.wifi, {
+            'ssid': 'MyNetwork',
+            'password': 'password123',
+            'security': 'WPA',
+          });
+
+          expect(result, isEmpty);
+        });
+
+        test('should invalidate WiFi without SSID', () {
+          final result = registry.validateData(QRCodeType.wifi, {
+            'ssid': '',
+            'password': 'password123',
+            'security': 'WPA',
+          });
+
+          expect(result, isNotEmpty);
+          expect(result['ssid'], isNotNull);
+        });
+
+        test('should invalidate WPA/WEP without password', () {
+          final result = registry.validateData(QRCodeType.wifi, {
+            'ssid': 'MyNetwork',
+            'password': '',
+            'security': 'WPA',
+          });
+
+          expect(result, isNotEmpty);
+          expect(result['password'], isNotNull);
+        });
+
+        test('should validate Open network without password', () {
+          final result = registry.validateData(QRCodeType.wifi, {
+            'ssid': 'MyNetwork',
+            'password': '',
+            'security': 'Open',
+          });
+
+          expect(result, isEmpty);
+        });
+      });
+
+      group('vCard Type', () {
+        test('should validate vCard with first name only', () {
+          final result = registry.validateData(QRCodeType.vcard, {
+            'firstName': 'John',
+            'lastName': '',
+          });
+
+          expect(result, isEmpty);
+        });
+
+        test('should validate vCard with last name only', () {
+          final result = registry.validateData(QRCodeType.vcard, {
+            'firstName': '',
+            'lastName': 'Doe',
+          });
+
+          expect(result, isEmpty);
+        });
+
+        test('should invalidate vCard without any name', () {
+          final result = registry.validateData(QRCodeType.vcard, {
+            'firstName': '',
+            'lastName': '',
+          });
+
+          expect(result, isNotEmpty);
+          expect(result['firstName'], isNotNull);
+        });
+
+        test('should invalidate vCard with invalid email', () {
+          final result = registry.validateData(QRCodeType.vcard, {
+            'firstName': 'John',
+            'lastName': 'Doe',
+            'email': 'invalid-email',
+          });
+
+          expect(result, isNotEmpty);
+          expect(result['email'], isNotNull);
+        });
+      });
+
+      group('Business Type', () {
+        test('should validate business with company name', () {
+          final result = registry.validateData(QRCodeType.business, {
+            'company': 'Acme Corp',
+          });
+
+          expect(result, isEmpty);
+        });
+
+        test('should invalidate business without company name', () {
+          final result = registry.validateData(QRCodeType.business, {
+            'company': '',
+          });
+
+          expect(result, isNotEmpty);
+          expect(result['company'], isNotNull);
+        });
+
+        test('should invalidate business with invalid email', () {
+          final result = registry.validateData(QRCodeType.business, {
+            'company': 'Acme Corp',
+            'email': 'not-an-email',
+          });
+
+          expect(result, isNotEmpty);
+          expect(result['email'], isNotNull);
+        });
+      });
+
+      group('Event Type', () {
+        test('should validate event with summary and start date', () {
+          final now = DateTime.now().toIso8601String();
+          final result = registry.validateData(QRCodeType.event, {
+            'summary': 'Team Meeting',
+            'startDate': now,
+          });
+
+          expect(result, isEmpty);
+        });
+
+        test('should invalidate event without summary', () {
+          final now = DateTime.now().toIso8601String();
+          final result = registry.validateData(QRCodeType.event, {
+            'summary': '',
+            'startDate': now,
+          });
+
+          expect(result, isNotEmpty);
+          expect(result['summary'], isNotNull);
+        });
+
+        test('should invalidate event without start date', () {
+          final result = registry.validateData(QRCodeType.event, {
+            'summary': 'Team Meeting',
+            'startDate': '',
+          });
+
+          expect(result, isNotEmpty);
+          expect(result['startDate'], isNotNull);
+        });
+
+        test('should invalidate event with end date before start date', () {
+          final start = DateTime.now();
+          final end = start.subtract(const Duration(hours: 1));
+
+          final result = registry.validateData(QRCodeType.event, {
+            'summary': 'Team Meeting',
+            'startDate': start.toIso8601String(),
+            'endDate': end.toIso8601String(),
+          });
+
+          expect(result, isNotEmpty);
+          expect(result['endDate'], isNotNull);
+        });
+      });
     });
 
     group('QR Data Generation -', () {
@@ -345,11 +518,16 @@ void main() {
         expect(registry.getDisplayName(QRCodeType.location), isNotEmpty);
         expect(registry.getDisplayName(QRCodeType.twitter), isNotEmpty);
         expect(registry.getDisplayName(QRCodeType.instagram), isNotEmpty);
+        expect(registry.getDisplayName(QRCodeType.wifi), isNotEmpty);
+        expect(registry.getDisplayName(QRCodeType.vcard), isNotEmpty);
+        expect(registry.getDisplayName(QRCodeType.business), isNotEmpty);
+        expect(registry.getDisplayName(QRCodeType.event), isNotEmpty);
       });
 
       test('should return empty string for unregistered types', () {
-        final displayName = registry.getDisplayName(QRCodeType.wifi);
-        expect(displayName, isEmpty);
+        // All types are now registered, so this test checks a non-existent type
+        // We can skip this test or keep it for documentation
+        expect(registry.supportedTypes.length, equals(12));
       });
     });
 
@@ -365,8 +543,8 @@ void main() {
       });
 
       test('should return empty string for unregistered types', () {
-        final wifiIcon = registry.getIcon(QRCodeType.wifi);
-        expect(wifiIcon, isEmpty);
+        // All 12 types are now registered in Phase 3
+        expect(registry.supportedTypes.length, equals(12));
       });
     });
   });

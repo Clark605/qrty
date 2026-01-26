@@ -9,6 +9,10 @@ import 'package:qrty/core/qr_types/definitions/sms_qr_definition.dart';
 import 'package:qrty/core/qr_types/definitions/location_qr_definition.dart';
 import 'package:qrty/core/qr_types/definitions/twitter_qr_definition.dart';
 import 'package:qrty/core/qr_types/definitions/instagram_qr_definition.dart';
+import 'package:qrty/core/qr_types/definitions/wifi_qr_definition.dart';
+import 'package:qrty/core/qr_types/definitions/vcard_qr_definition.dart';
+import 'package:qrty/core/qr_types/definitions/business_qr_definition.dart';
+import 'package:qrty/core/qr_types/definitions/event_qr_definition.dart';
 
 /// Central registry for QR type definitions
 ///
@@ -56,11 +60,11 @@ class QrTypeRegistry {
     _register(TwitterQrDefinition());
     _register(InstagramQrDefinition());
 
-    // TODO Phase 3: Add complex types
-    // _register(WifiQrDefinition());
-    // _register(VCardQrDefinition());
-    // _register(BusinessQrDefinition());
-    // _register(EventQrDefinition());
+    // Phase 3: Complex types
+    _register(WifiQrDefinition());
+    _register(VCardQrDefinition());
+    _register(BusinessQrDefinition());
+    _register(EventQrDefinition());
   }
 
   /// Register a single QR type definition
