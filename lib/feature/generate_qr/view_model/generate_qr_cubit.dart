@@ -1,15 +1,14 @@
-import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
-import 'package:qrty/core/utils/history_helper.dart';
-import 'package:qrty/core/utils/qr_content_generator.dart';
+import 'package:qrty/feature/generate_qr/data/services/generate_service.dart';
 
 part 'generate_qr_state.dart';
 
 class GenerateQrCubit extends Cubit<GenerateQrState> {
-  GenerateQrCubit() : super(const GenerateQrState());
+  final GenerateService _generateService;
+
+  GenerateQrCubit(this._generateService) : super(const GenerateQrState());
 
   // Select QR type from main grid
   void selectQrType(QRCodeType type) {
@@ -43,7 +42,7 @@ class GenerateQrCubit extends Cubit<GenerateQrState> {
       return false;
     }
 
-    final errors = QrContentGenerator.validateFormData(
+    final errors = _generateService.validateFormData(
       state.selectedType!,
       state.formData,
     );
@@ -61,7 +60,7 @@ class GenerateQrCubit extends Cubit<GenerateQrState> {
       throw Exception('No QR type selected');
     }
 
-    return QrContentGenerator.generateQrData(
+    return _generateService.generateQrData(
       state.selectedType!,
       state.formData,
     );
@@ -89,11 +88,11 @@ class GenerateQrCubit extends Cubit<GenerateQrState> {
       final qrData = _generateQrData();
 
       // Save to history
-      await HistoryHelper.saveCreatedQr(
+      await _generateService.saveToHistory(
         data: qrData,
         type: state.selectedType!,
       );
-      log('QR data saved to history: $qrData');
+
       emit(
         state.copyWith(status: GenerateQrStatus.success, generatedData: qrData),
       );

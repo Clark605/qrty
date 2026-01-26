@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
-import 'package:qrty/feature/generate_qr/widgets/qr_type_item.dart';
+import 'package:qrty/feature/generate_qr/view/widgets/qr_type_item.dart';
 
 class QrTypeGrid extends StatelessWidget {
   final Function(QRCodeType) onTypeSelected;

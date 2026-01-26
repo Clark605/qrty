@@ -8,7 +8,8 @@ import 'package:qrty/core/common/widgets/fab.dart';
 import 'package:qrty/core/constants/app_assets.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/theme/app_colors.dart';
-import 'package:qrty/feature/generate_qr/cubit/generate_qr_cubit.dart';
+import 'package:qrty/feature/generate_qr/data/services/generate_service.dart';
+import 'package:qrty/feature/generate_qr/view_model/generate_qr_cubit.dart';
 import 'package:qrty/feature/generate_qr/view/generate_qr_screen.dart';
 import 'package:qrty/feature/history/cubit/history_cubit.dart';
 import 'package:qrty/feature/history/view/history_screen.dart';
@@ -30,7 +31,7 @@ class AppSectionState extends State<AppSection> {
 
   final List<Widget> screens = [
     BlocProvider(
-      create: (context) => GenerateQrCubit(),
+      create: (context) => GenerateQrCubit(GenerateService()),
       child: const GenerateQrScreen(),
     ),
     BlocProvider(

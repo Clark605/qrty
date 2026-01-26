@@ -5,7 +5,7 @@ import 'package:qrty/core/common/widgets/app_background.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/routes/routes.dart';
 import 'package:qrty/core/theme/app_colors.dart';
-import 'package:qrty/feature/generate_qr/cubit/generate_qr_cubit.dart';
+import 'package:qrty/feature/generate_qr/view_model/generate_qr_cubit.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
 /// Base form screen widget for simple QR types with single or few fields

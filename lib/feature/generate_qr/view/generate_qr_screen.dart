@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/theme/app_colors.dart';
-import 'package:qrty/feature/generate_qr/cubit/generate_qr_cubit.dart';
-import 'package:qrty/feature/generate_qr/utils/qr_form_screen_factory.dart';
-import 'package:qrty/feature/generate_qr/widgets/qr_type_grid.dart';
+import 'package:qrty/feature/generate_qr/view_model/generate_qr_cubit.dart';
+import 'package:qrty/core/utils/qr_form_screen_factory.dart';
+import 'package:qrty/feature/generate_qr/view/widgets/qr_type_grid.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
 class GenerateQrScreen extends StatelessWidget {
