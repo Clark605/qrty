@@ -4,6 +4,11 @@ import 'package:qrty/core/qr_types/qr_type_definition.dart';
 import 'package:qrty/core/qr_types/definitions/text_qr_definition.dart';
 import 'package:qrty/core/qr_types/definitions/url_qr_definition.dart';
 import 'package:qrty/core/qr_types/definitions/email_qr_definition.dart';
+import 'package:qrty/core/qr_types/definitions/phone_qr_definition.dart';
+import 'package:qrty/core/qr_types/definitions/sms_qr_definition.dart';
+import 'package:qrty/core/qr_types/definitions/location_qr_definition.dart';
+import 'package:qrty/core/qr_types/definitions/twitter_qr_definition.dart';
+import 'package:qrty/core/qr_types/definitions/instagram_qr_definition.dart';
 
 /// Central registry for QR type definitions
 ///
@@ -39,17 +44,17 @@ class QrTypeRegistry {
   /// This is where all supported QR types are registered.
   /// Add new type registrations here.
   void _registerTypes() {
-    // Phase 1: Simple types
+    // Phase 1: Simple types (Text, URL, Email)
     _register(TextQrDefinition());
     _register(UrlQrDefinition());
     _register(EmailQrDefinition());
 
-    // TODO Phase 2: Add remaining simple types
-    // _register(PhoneQrDefinition());
-    // _register(SmsQrDefinition());
-    // _register(TwitterQrDefinition());
-    // _register(InstagramQrDefinition());
-    // _register(LocationQrDefinition());
+    // Phase 2: Remaining simple types
+    _register(PhoneQrDefinition());
+    _register(SmsQrDefinition());
+    _register(LocationQrDefinition());
+    _register(TwitterQrDefinition());
+    _register(InstagramQrDefinition());
 
     // TODO Phase 3: Add complex types
     // _register(WifiQrDefinition());
