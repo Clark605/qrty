@@ -24,10 +24,7 @@ class GenerateService {
   /// Generates QR data string from form data
   ///
   /// Throws [Exception] if QR type is invalid or data is malformed.
-  String generateQrData(
-    QRCodeType type,
-    Map<String, String> formData,
-  ) {
+  String generateQrData(QRCodeType type, Map<String, String> formData) {
     return QrContentGenerator.generateQrData(type, formData);
   }
 
@@ -38,10 +35,7 @@ class GenerateService {
     required String data,
     required QRCodeType type,
   }) async {
-    await HistoryHelper.saveCreatedQr(
-      data: data,
-      type: type,
-    );
+    await HistoryHelper.saveCreatedQr(data: data, type: type);
     log('QR data saved to history: $data');
   }
 }
