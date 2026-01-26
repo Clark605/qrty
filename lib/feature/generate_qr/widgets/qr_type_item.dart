@@ -1,17 +1,18 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/theme/app_colors.dart';
 import 'package:qrty/core/utils/type_icon.dart';
-import 'package:qrty/l10n/locale_keys.g.dart';
+import 'package:qrty/core/qr_types/qr_type_registry.dart';
 
 class QrTypeItem extends StatelessWidget {
   final QRCodeType type;
   final VoidCallback onTap;
 
   const QrTypeItem({super.key, required this.type, required this.onTap});
+
+  static final _registry = QrTypeRegistry();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class QrTypeItem extends StatelessWidget {
             SvgPicture.asset(TypeIcon.typeIcon(type), height: context.wp(6.5)),
             SizedBox(height: context.hp(0.5)),
             Text(
-              _getTypeName(),
+              _registry.getDisplayName(type),
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: AppColors.primary,
                 fontSize: context.sp(12),
@@ -45,34 +46,5 @@ class QrTypeItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _getTypeName() {
-    switch (type) {
-      case QRCodeType.text:
-        return LocaleKeys.text.tr();
-      case QRCodeType.url:
-        return LocaleKeys.website.tr();
-      case QRCodeType.wifi:
-        return LocaleKeys.wifi.tr();
-      case QRCodeType.event:
-        return LocaleKeys.event.tr();
-      case QRCodeType.vcard:
-        return LocaleKeys.contact.tr();
-      case QRCodeType.business:
-        return LocaleKeys.business.tr();
-      case QRCodeType.location:
-        return LocaleKeys.location.tr();
-      case QRCodeType.email:
-        return LocaleKeys.email.tr();
-      case QRCodeType.phone:
-        return LocaleKeys.telephone.tr();
-      case QRCodeType.twitter:
-        return LocaleKeys.twitter.tr();
-      case QRCodeType.instagram:
-        return LocaleKeys.instagram.tr();
-      case QRCodeType.sms:
-        return LocaleKeys.whatsapp.tr(); // Using WhatsApp label for SMS for now
-    }
   }
 }

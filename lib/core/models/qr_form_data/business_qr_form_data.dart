@@ -1,5 +1,5 @@
 import 'package:qrty/core/models/qr_form_data/qr_form_data_base.dart';
-import 'package:qrty/core/utils/qr_data_generators/email_validator.dart';
+import 'package:qrty/core/utils/validators.dart';
 
 /// Form data model for Business Card QR codes
 ///

@@ -4,7 +4,7 @@ import 'package:qrty/core/constants/app_assets.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/models/qr_form_data/business_qr_form_data.dart';
 import 'package:qrty/core/qr_types/qr_type_definition.dart';
-import 'package:qrty/core/utils/qr_data_generators/vcard_generator.dart';
+import 'package:qrty/core/utils/qr_generators.dart';
 import 'package:qrty/feature/generate_qr/view/forms/complex/business_qr_form_screen.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
