@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:qrty/feature/generate_qr/cubit/generate_qr_cubit.dart';
-import 'package:qrty/feature/generate_qr/widgets/base_qr_form_screen.dart';
-import 'package:qrty/feature/generate_qr/widgets/qr_form_field.dart';
+import 'package:qrty/feature/generate_qr/view_model/generate_qr_cubit.dart';
+import 'package:qrty/feature/generate_qr/view/widgets/base_qr_form_screen.dart';
+import 'package:qrty/feature/generate_qr/view/widgets/qr_form_field.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
 /// Form screen for phone QR codes

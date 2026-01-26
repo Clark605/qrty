@@ -8,9 +8,9 @@ import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/extensions/navigator_extensions.dart';
 import 'package:qrty/core/routes/routes.dart';
 import 'package:qrty/core/theme/app_colors.dart';
-import 'package:qrty/feature/qr_view/cubit/qr_view_cubit.dart';
-import 'package:qrty/feature/qr_view/widgets/action_button.dart';
-import 'package:qrty/feature/qr_view/widgets/text_data_view.dart';
+import 'package:qrty/feature/qr_view/view_model/qr_view_cubit.dart';
+import 'package:qrty/feature/qr_view/view/widgets/action_button.dart';
+import 'package:qrty/feature/qr_view/view/widgets/text_data_view.dart';
 import 'package:qrty/l10n/locale_keys.g.dart';
 
 class QrResultScreen extends StatelessWidget {

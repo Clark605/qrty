@@ -6,10 +6,10 @@ import 'package:qrty/core/extensions/media_query_extensions.dart';
 import 'package:qrty/core/extensions/navigator_extensions.dart';
 import 'package:qrty/core/routes/routes.dart';
 import 'package:qrty/core/theme/app_colors.dart';
-import 'package:qrty/feature/scan_qr/cubit/scan_qr_cubit.dart';
-import 'package:qrty/feature/scan_qr/widgets/conrtol_button.dart';
-import 'package:qrty/feature/scan_qr/widgets/qr_scanner_overlay.dart';
-import 'package:qrty/feature/scan_qr/widgets/zoom_slider.dart';
+import 'package:qrty/feature/scan_qr/view_model/scan_qr_cubit.dart';
+import 'package:qrty/feature/scan_qr/view/widgets/conrtol_button.dart';
+import 'package:qrty/feature/scan_qr/view/widgets/qr_scanner_overlay.dart';
+import 'package:qrty/feature/scan_qr/view/widgets/zoom_slider.dart';
 
 class ScanQrScreen extends StatefulWidget {
   const ScanQrScreen({super.key});
@@ -52,7 +52,7 @@ class _ScanQrScreenState extends State<ScanQrScreen> {
           children: [
             // Camera Scanner
             MobileScanner(
-              controller: cubit.scannerController,
+              controller: cubit.scanService.scannerController,
               scanWindow: QRScannerOverlay.getScanArea(context),
               onDetect: cubit.onBarcodeDetected,
             ),

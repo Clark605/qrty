@@ -1,5 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:qrty/core/services/settings_service.dart';
+import 'package:qrty/feature/settings/data/settings_service.dart';
 import 'package:vibration/vibration.dart';
 
 class FeedbackService {
@@ -13,7 +13,7 @@ class FeedbackService {
   /// Play feedback (vibration and/or beep) based on user settings
   Future<void> playFeedback() async {
     try {
-      final settings = await SettingsService.instance.getSettings();
+      final settings = await SettingsService().getSettings();
 
       // Play vibration if enabled
       if (settings.isVibrateEnabled) {
