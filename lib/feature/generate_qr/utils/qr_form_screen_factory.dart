@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
+import 'package:qrty/core/qr_types/qr_type_registry.dart';
 import 'package:qrty/feature/generate_qr/view/forms/simple/text_qr_form_screen.dart';
 import 'package:qrty/feature/generate_qr/view/forms/simple/url_qr_form_screen.dart';
 import 'package:qrty/feature/generate_qr/view/forms/simple/email_qr_form_screen.dart';
@@ -14,8 +15,18 @@ import 'package:qrty/feature/generate_qr/view/forms/complex/business_qr_form_scr
 import 'package:qrty/feature/generate_qr/view/forms/complex/event_qr_form_screen.dart';
 
 /// Factory class to create QR form screens based on QR type
+///
+/// Now uses the registry for supported types, falls back to legacy switch for unmigrated types.
 class QrFormScreenFactory {
+  static final _registry = QrTypeRegistry();
+
   static Widget? createFormScreen(QRCodeType type) {
+    // Try registry first (Phase 1: Text, URL, Email)
+    if (_registry.isSupported(type)) {
+      return _registry.buildForm(type);
+    }
+
+    // Fallback to legacy switch for unmigrated types
     switch (type) {
       case QRCodeType.text:
         return const TextQrFormScreen();
@@ -63,6 +74,12 @@ class QrFormScreenFactory {
 
   /// Get display name for QR type in navigation
   static String getDisplayName(QRCodeType type) {
+    // Try registry first
+    if (_registry.isSupported(type)) {
+      return _registry.getDisplayName(type);
+    }
+
+    // Fallback to legacy switch for unmigrated types
     switch (type) {
       case QRCodeType.text:
         return 'Text';

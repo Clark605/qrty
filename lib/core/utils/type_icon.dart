@@ -1,8 +1,17 @@
 import 'package:qrty/core/constants/app_assets.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
+import 'package:qrty/core/qr_types/qr_type_registry.dart';
 
 abstract class TypeIcon {
+  static final _registry = QrTypeRegistry();
+
   static String typeIcon(QRCodeType type) {
+    // Try registry first (Phase 1: Text, URL, Email)
+    if (_registry.isSupported(type)) {
+      return _registry.getIcon(type);
+    }
+
+    // Fallback to legacy switch for unmigrated types
     switch (type) {
       case QRCodeType.url:
         return AppAssets.website;

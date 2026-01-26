@@ -1,4 +1,5 @@
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
+import 'package:qrty/core/qr_types/qr_type_registry.dart';
 import 'package:qrty/core/utils/qr_data_generators/vcard_generator.dart';
 import 'package:qrty/core/utils/qr_data_generators/ical_generator.dart';
 import 'package:qrty/core/utils/qr_data_generators/wifi_generator.dart';
@@ -7,9 +8,19 @@ import 'package:qrty/core/utils/qr_data_generators/email_validator.dart';
 import 'package:qrty/core/utils/qr_data_generators/phone_validator.dart';
 
 /// Unified QR content generator that handles all QR types
+///
+/// Now uses the registry for migrated types, falls back to legacy switch for unmigrated types.
 class QrContentGenerator {
+  static final _registry = QrTypeRegistry();
+
   /// Generate QR data based on type and form data
   static String generateQrData(QRCodeType type, Map<String, String> formData) {
+    // Try registry first (Phase 1: Text, URL, Email)
+    if (_registry.isSupported(type)) {
+      return _registry.generateQrData(type, formData);
+    }
+
+    // Fallback to legacy switch for unmigrated types
     switch (type) {
       case QRCodeType.text:
         return formData['text'] ?? '';
@@ -127,6 +138,12 @@ class QrContentGenerator {
     QRCodeType type,
     Map<String, String> formData,
   ) {
+    // Try registry first (Phase 1: Text, URL, Email)
+    if (_registry.isSupported(type)) {
+      return _registry.validateData(type, formData);
+    }
+
+    // Fallback to legacy switch for unmigrated types
     final errors = <String, String>{};
 
     switch (type) {
