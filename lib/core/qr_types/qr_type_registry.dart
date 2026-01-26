@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
 import 'package:qrty/core/qr_types/qr_type_definition.dart';
-import 'package:qrty/core/qr_types/definitions/text_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/url_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/email_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/phone_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/sms_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/location_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/twitter_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/instagram_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/wifi_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/vcard_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/business_qr_definition.dart';
-import 'package:qrty/core/qr_types/definitions/event_qr_definition.dart';
+import 'package:qrty/core/qr_types/text_qr_type.dart';
+import 'package:qrty/core/qr_types/url_qr_type.dart';
+import 'package:qrty/core/qr_types/email_qr_type.dart';
+import 'package:qrty/core/qr_types/phone_qr_type.dart';
+import 'package:qrty/core/qr_types/sms_qr_type.dart';
+import 'package:qrty/core/qr_types/location_qr_type.dart';
+import 'package:qrty/core/qr_types/twitter_qr_type.dart';
+import 'package:qrty/core/qr_types/instagram_qr_type.dart';
+import 'package:qrty/core/qr_types/wifi_qr_type.dart';
+import 'package:qrty/core/qr_types/vcard_qr_type.dart';
+import 'package:qrty/core/qr_types/business_qr_type.dart';
+import 'package:qrty/core/qr_types/event_qr_type.dart';
 
 /// Central registry for QR type definitions
 ///

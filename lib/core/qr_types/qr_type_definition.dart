@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qrty/core/enums/qr_code_type_enum.dart';
-import 'package:qrty/core/models/qr_form_data/qr_form_data_base.dart';
+import 'package:qrty/core/qr_types/qr_form_data_base.dart';
 
 /// Abstract definition for QR type behavior
 ///
